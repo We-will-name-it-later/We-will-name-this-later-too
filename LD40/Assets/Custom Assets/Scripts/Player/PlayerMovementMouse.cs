@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class PlayerMovementMouse: MonoBehaviour
 {
 	[Header("Bag Variables")]
@@ -11,6 +13,7 @@ public class PlayerMovementMouse: MonoBehaviour
 	[Header("Movement Variables")]
 	public float baseMoveSpeed = 6;
 	public float baseTurnSpeed;
+	public BoxCollider2D box;
 
 	[Space]
 
@@ -33,6 +36,7 @@ public class PlayerMovementMouse: MonoBehaviour
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		box = GetComponent<BoxCollider2D>();
 		actualMoveSpeed = baseMoveSpeed;
 		actualTurnSpeed = baseTurnSpeed;
 	}

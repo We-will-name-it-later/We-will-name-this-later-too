@@ -377,7 +377,6 @@ MonoBehaviour:
   timeBetweenShots: 2
   Bullet: {fileID: 1800822049246782, guid: 36a687e4fb6a3154e96cef3911453782, type: 2}
   muzzle: {fileID: 654162381}
-  Nangle: 0
   target: {fileID: 0}
 --- !u!4 &809508495 stripped
 Transform:
@@ -480,6 +479,7 @@ MonoBehaviour:
   wantToPickUp: 0
   baseMoveSpeed: 5
   baseTurnSpeed: 20
+  box: {fileID: 0}
   hitMask:
     serializedVersion: 2
     m_Bits: 256
@@ -774,6 +774,7 @@ GameObject:
   - component: {fileID: 1846330618}
   - component: {fileID: 1846330617}
   - component: {fileID: 1846330616}
+  - component: {fileID: 1846330620}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -843,6 +844,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1846330620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1846330615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3bf057e88dac454e923dc307f512be4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1327420050}
+  deadZoneSize: {x: 2, y: 2}
 --- !u!1001 &1847684959
 Prefab:
   m_ObjectHideFlags: 0
