@@ -25,6 +25,7 @@ public class PlayerMovementMouse: MonoBehaviour
 	[Header("Pick Ups")]
 	public int maxAmountOfBags = 6;
 	public int bagsHeld;
+	public Transform moneyHolder;
 
 	Vector3 movement;
 	Rigidbody2D rb;
@@ -70,10 +71,12 @@ public class PlayerMovementMouse: MonoBehaviour
 		if (down && actualMoveSpeed > 0.5f)
 		{
 			actualMoveSpeed -= 0.5f;
+			actualTurnSpeed -= 1f;
 		}
 		else if (!down)
 		{
 			actualMoveSpeed += 0.5f;
+			actualTurnSpeed += 1f;
 		}
 	}
 
@@ -99,7 +102,7 @@ public class PlayerMovementMouse: MonoBehaviour
 		{
 			bagsHeld--;
 			ChangeMovement(false);
-			Instantiate(Bag, this.transform.position, Quaternion.identity);
+			Instantiate(Bag, this.transform.position, Quaternion.identity, moneyHolder);
 		}
 	}
 
