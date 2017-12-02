@@ -107,7 +107,7 @@ public class PlayerMovementMouse: MonoBehaviour
 				(Camera.main.ScreenToWorldPoint(Input.mousePosition)), Color.red);
 			RaycastHit2D hit = Physics2D.Linecast(this.transform.position, 
 				(Camera.main.ScreenToWorldPoint(Input.mousePosition)), hitMask);
-			if (hit)
+			if (hit && Vector2.Distance(this.transform.position, hit.point) < 1)
 			{
 				Debug.Log("Hit");
 			}
