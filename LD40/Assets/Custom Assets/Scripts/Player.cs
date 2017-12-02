@@ -5,7 +5,7 @@ public class Player: MonoBehaviour
 	public float moveSpeed;
 	public float turnSpeed;
 
-	Vector2 movement;
+	Vector3 movement;
 	Rigidbody2D rb;
 	int floor;
 
@@ -17,13 +17,18 @@ public class Player: MonoBehaviour
 	private void FixedUpdate()
 	{
 		float v = Input.GetAxis("Vertical");
+		float h = Input.GetAxis("Horizontal");
 
 		Turning();
-		Move(v);
+		Move(v, h);
 	}
-	private void Move(float v)
+	private void Move(float v, float h)
 	{
-		rb.MovePosition(transform.position + transform.right * moveSpeed * v * Time.deltaTime);
+		movement.Set(h, v, 0f);
+
+		movement = movement.normalized * moveSpeed * Time.deltaTime;
+
+		rb.MovePosition(transform.position + movement);
 	}
 	private void Turning()
 	{
