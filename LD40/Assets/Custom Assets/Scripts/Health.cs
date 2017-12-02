@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour {
+public class Health : MonoBehaviour {
 
 	public int startingHealth = 100;
 

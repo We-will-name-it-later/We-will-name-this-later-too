@@ -20,6 +20,9 @@ public class PlayerMovementMouse: MonoBehaviour
 	private float actualMoveSpeed;
 	private float actualTurnSpeed;
 
+	[Space]
+
+	[Header("Pick Ups")]
 	public int maxAmountOfBags = 6;
 	public int bagsHeld;
 
@@ -110,6 +113,12 @@ public class PlayerMovementMouse: MonoBehaviour
 			if (hit && Vector2.Distance(this.transform.position, hit.point) < 1)
 			{
 				Debug.Log("Hit");
+				Health targetHealth = hit.collider.gameObject.GetComponent<Health>();
+				if (targetHealth != null)
+				{
+					targetHealth.TakeDamage(10 * bagsHeld);
+				}
+				 
 			}
 		}
 	}
