@@ -306,8 +306,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  waitTime: 0.3
-  turnSpeed: 90
+  waitTime: 0.1
+  turnSpeed: 180
   pathHolder: {fileID: 1169280223}
 --- !u!1 &1169280222
 GameObject:
