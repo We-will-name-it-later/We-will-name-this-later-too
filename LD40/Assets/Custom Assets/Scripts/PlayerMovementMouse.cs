@@ -2,11 +2,20 @@
 
 public class PlayerMovementMouse: MonoBehaviour
 {
+	[Header("Bag Variables")]
 	public GameObject Bag;
 	public bool wantToPickUp = false;
 
+	[Space]
+
+	[Header("Movement Variables")]
 	public float baseMoveSpeed = 6;
 	public float baseTurnSpeed;
+
+	[Space]
+
+	[Header("Combat Variables")]
+	public LayerMask hitMask;
 
 	private float actualMoveSpeed;
 	private float actualTurnSpeed;
@@ -37,6 +46,11 @@ public class PlayerMovementMouse: MonoBehaviour
 		else
 		{
 			wantToPickUp = false;
+		}
+
+		if (Input.GetKeyDown(KeyCode.Space) && bagsHeld > 0)
+		{
+			AttackWithBag();
 		}
 	}
 	private void FixedUpdate()
@@ -84,6 +98,19 @@ public class PlayerMovementMouse: MonoBehaviour
 			ChangeMovement(false);
 			Instantiate(Bag, this.transform.position, Quaternion.identity);
 		}
-		
+	}
+
+	private void AttackWithBag() {
+		if (bagsHeld > 0 && bagsHeld < 6)
+		{
+			Debug.DrawLine(this.transform.position,
+				(Camera.main.ScreenToWorldPoint(Input.mousePosition)), Color.red);
+			RaycastHit2D hit = Physics2D.Linecast(this.transform.position, 
+				(Camera.main.ScreenToWorldPoint(Input.mousePosition)), hitMask);
+			if (hit)
+			{
+				Debug.Log("Hit");
+			}
+		}
 	}
 }
