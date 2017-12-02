@@ -16,8 +16,8 @@ public class PlayerMovementMouse: MonoBehaviour
 	}
 	private void FixedUpdate()
 	{
-		float v = Input.GetAxis("Vertical");
-		float h = Input.GetAxis("Horizontal");
+		float v = Input.GetAxisRaw("Vertical");
+		float h = Input.GetAxisRaw("Horizontal");
 
 		Turning();
 		Move(v, h);
