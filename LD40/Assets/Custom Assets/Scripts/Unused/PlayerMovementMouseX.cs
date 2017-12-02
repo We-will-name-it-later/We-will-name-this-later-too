@@ -9,12 +9,10 @@ public class PlayerMovementMouseX : MonoBehaviour {
 
 	Vector3 movement;
 	Rigidbody2D rb;
-	int floor;
 
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
-		floor = LayerMask.GetMask("Floor");
 	}
 	private void FixedUpdate()
 	{
