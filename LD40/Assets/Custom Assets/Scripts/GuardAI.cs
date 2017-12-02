@@ -20,16 +20,18 @@ public class GuardAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.DrawRay(transform.position, (target.position - transform.position) * 50f, Color.green);
-
-		Vector3 direction = target.position - transform.position;
-		float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-		//float angle = Vector3.Angle((target.position - transform.position), Vector3.up);
-		Debug.Log(angle);
-
-		if (canSeeTarget)
+		if (target != null)
 		{
-			OnSee(angle);
+			Debug.DrawRay(transform.position, (target.position - transform.position) * 50f, Color.green);
+
+			Vector3 direction = target.position - transform.position;
+			float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+			//float angle = Vector3.Angle((target.position - transform.position), Vector3.up);
+
+			if (canSeeTarget)
+			{
+				OnSee(angle);
+			}
 		}
 	}
 
