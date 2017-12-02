@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Player: MonoBehaviour
+public class PlayerMovementMouse: MonoBehaviour
 {
 	public float moveSpeed;
 	public float turnSpeed;
