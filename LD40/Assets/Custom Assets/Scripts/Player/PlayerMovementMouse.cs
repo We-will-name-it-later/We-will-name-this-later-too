@@ -24,7 +24,6 @@ public class PlayerMovementMouse: MonoBehaviour
 	public float timeBetweenAttacks = 2;
 	private float timeTillNextAttack = 0;
 	private float attackAnimFinTime;
-	private bool hasAtk;
 
 	[Space]
 
@@ -48,7 +47,6 @@ public class PlayerMovementMouse: MonoBehaviour
 		box = GetComponent<BoxCollider2D>();
 		actualMoveSpeed = baseMoveSpeed;
 		actualTurnSpeed = baseTurnSpeed;
-		anim.ResetTrigger("doneAttacking");
 	}
 
 	private void Update()
@@ -66,19 +64,16 @@ public class PlayerMovementMouse: MonoBehaviour
 			wantToPickUp = false;
 		}
 
-		if (Input.GetKeyDown(KeyCode.Space) && bagsHeld > 0 && Time.time > timeTillNextAttack)
+		if (Time.time > timeTillNextAttack && Input.GetKeyDown(KeyCode.Space) && bagsHeld > 0)
 		{
-			attackAnimFinTime = Time.time + 1;
-			anim.ResetTrigger("doneAttacking");
+			attackAnimFinTime = Time.time + timeBetweenAttacks;
 			timeTillNextAttack += timeBetweenAttacks;
 			AttackWithBag();
-			hasAtk = true;
 		}
-		else if (Time.time > attackAnimFinTime && hasAtk)
+		else if (Time.time > attackAnimFinTime)
 		{
-			hasAtk = false;
-			anim.ResetTrigger("isAttacking");
-			anim.SetTrigger("doneAttacking");
+			print("can attack");
+			anim.SetBool("isAttacking", false);
 		}
 	}
 	private void FixedUpdate()
@@ -164,7 +159,8 @@ public class PlayerMovementMouse: MonoBehaviour
 	private void AttackWithBag() {
 		if (bagsHeld > 0 && bagsHeld < maxAmountOfBags)
 		{
-			anim.SetTrigger("isAttacking");
+			print("attack");
+			anim.SetBool("isAttacking", true);
 			Debug.DrawLine(this.transform.position,
 				(Camera.main.ScreenToWorldPoint(Input.mousePosition)), Color.cyan);
 			RaycastHit2D hit = Physics2D.Linecast(this.transform.position, 

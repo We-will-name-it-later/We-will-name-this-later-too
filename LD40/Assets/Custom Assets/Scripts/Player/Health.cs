@@ -6,14 +6,14 @@ public class Health : MonoBehaviour {
 	public int startingHealth = 100;
 	public GameObject canvas;
 
-	AudioSource audio;
+	AudioSource audioSource;
 	public AudioClip hitEffect;
 
 	[SerializeField] private int currentHealth;
 
 	private void Start()
 	{
-		audio = GetComponent<AudioSource>();
+		audioSource = GetComponent<AudioSource>();
 		currentHealth = startingHealth;
 	}
 
@@ -21,7 +21,7 @@ public class Health : MonoBehaviour {
 		currentHealth -= damage;
 		if (this.gameObject.CompareTag("Player"))
 		{
-			audio.PlayOneShot(hitEffect);
+			audioSource.PlayOneShot(hitEffect);
 			canvas.GetComponent<Animator>().SetTrigger("Damage Trigger");
 		}
 
