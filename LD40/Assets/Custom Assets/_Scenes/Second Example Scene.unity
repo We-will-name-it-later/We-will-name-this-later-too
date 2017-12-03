@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ccab712bd3749469497ad747819666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canSeeTarget: 0
+  canSeeTarget: 1
   turnSpeed: 90
   timeBetweenShots: 2
   Bullet: {fileID: 1800822049246782, guid: 36a687e4fb6a3154e96cef3911453782, type: 2}
