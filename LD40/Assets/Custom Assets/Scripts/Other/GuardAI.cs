@@ -34,11 +34,18 @@ public class GuardAI : MonoBehaviour {
 
 	public Transform pathHolder;
 
+	AudioSource audio;
+	public AudioClip shotSound;
+	public AudioClip heySound;
+	bool hasAudioPlayed = false;
+
 	// Use this for initialization
 	private void Start () {
 		viewMesh = new Mesh();
 		viewMesh.name = "View Mesh";
 		viewMeshFilter.mesh = viewMesh;
+
+		audio = GetComponent<AudioSource>();
 
 		target = FindObjectOfType<PlayerMovementMouse>().transform;
 		Vector2[] waypoints = new Vector2[pathHolder.childCount];
@@ -145,6 +152,7 @@ public class GuardAI : MonoBehaviour {
 		print("shot");
 		if (Time.time >= timeTillNextShot)
 		{
+			audio.PlayOneShot(shotSound, 0.4f);
 			timeTillNextShot = Time.time + 1f / fireRate;
 			Destroy(Instantiate(Bullet, muzzle.position, transform.rotation), 5);
 		}
@@ -175,6 +183,11 @@ public class GuardAI : MonoBehaviour {
 			}
 			else
 			{
+				if (!hasAudioPlayed)
+				{
+					audio.PlayOneShot(heySound);
+					hasAudioPlayed = true;
+				}
 				direction = target.position - transform.position;
 				angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 				transform.eulerAngles = Vector3.forward * (270 + angle);
@@ -194,6 +207,7 @@ public class GuardAI : MonoBehaviour {
 		{
 			float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.z, targetAngle, turnSpeed * Time.deltaTime);
 			transform.eulerAngles = Vector3.forward * angle;
+			hasAudioPlayed = false;
 			yield return null;
 		}
 	}
