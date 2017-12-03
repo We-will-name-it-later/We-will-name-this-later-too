@@ -16,13 +16,16 @@ public class CameraFollow : MonoBehaviour {
 
 	private void LateUpdate()
 	{
-		deadZone.Update(target.box.bounds);
+		if (target != null)
+		{
+			deadZone.Update(target.box.bounds);
 
-		Vector3 pos = deadZone.centre;
+			Vector3 pos = deadZone.centre;
 
-		pos += Camera.main.ScreenToWorldPoint(Input.mousePosition).normalized * 0.5f;
+			pos += Camera.main.ScreenToWorldPoint(Input.mousePosition).normalized * 0.5f;
 
-		transform.position = pos + Vector3.forward * -10f;
+			transform.position = pos + Vector3.forward * -10f;
+		}
 	}
 
 	private void OnDrawGizmos()

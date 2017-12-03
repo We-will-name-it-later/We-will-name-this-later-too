@@ -156,11 +156,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 212461604469755552, guid: e425453ee61178a45b058a3f80fd6580,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: -1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e425453ee61178a45b058a3f80fd6580, type: 2}
   m_IsPrefabParent: 0
@@ -921,11 +916,6 @@ Prefab:
     - target: {fileID: 1643853471307514, guid: e425453ee61178a45b058a3f80fd6580, type: 2}
       propertyPath: m_Name
       value: Money (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 212461604469755552, guid: e425453ee61178a45b058a3f80fd6580,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e425453ee61178a45b058a3f80fd6580, type: 2}
