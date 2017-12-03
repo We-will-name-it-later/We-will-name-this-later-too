@@ -22,9 +22,13 @@ public class Health : MonoBehaviour {
 	private void Die() {
 		if (this.gameObject.CompareTag("Player"))
 		{
-			// create game over screen
+			OnPlayerDeath();
 		}
 
 		Destroy(this.gameObject);
+	}
+
+	public virtual void OnPlayerDeath() {
+
 	}
 }

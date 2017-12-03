@@ -716,8 +716,8 @@ GameObject:
   - component: {fileID: 1327420050}
   - component: {fileID: 1327420053}
   - component: {fileID: 1327420054}
-  - component: {fileID: 1327420055}
   - component: {fileID: 1327420056}
+  - component: {fileID: 1327420055}
   m_Layer: 0
   m_Name: FaarisDankAssCharacter
   m_TagString: Player
@@ -858,10 +858,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1327420049}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af093015e01e2e442a08fa4d40ac2136, type: 3}
+  m_Script: {fileID: 11500000, guid: c86fd94a37ea12d4c9a4925412624af2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 100
+  deathCanvas: {fileID: 1842374726}
 --- !u!95 &1327420056
 Animator:
   serializedVersion: 3
