@@ -8,6 +8,7 @@ public class PlayerMovementMouse: MonoBehaviour
 	[Header("Bag Variables")]
 	public GameObject Bag;
 	public bool wantToPickUp = false;
+	public SpriteRenderer[] Bags;
 
 	[Space]
 
@@ -23,6 +24,7 @@ public class PlayerMovementMouse: MonoBehaviour
 	public float timeBetweenAttacks = 2;
 	private float timeTillNextAttack = 0;
 	private float attackAnimFinTime;
+	private bool hasAtk;
 
 	[Space]
 
@@ -70,9 +72,11 @@ public class PlayerMovementMouse: MonoBehaviour
 			anim.ResetTrigger("doneAttacking");
 			timeTillNextAttack += timeBetweenAttacks;
 			AttackWithBag();
+			hasAtk = true;
 		}
-		if (Time.time > attackAnimFinTime)
+		else if (Time.time > attackAnimFinTime && hasAtk)
 		{
+			hasAtk = false;
 			anim.ResetTrigger("isAttacking");
 			anim.SetTrigger("doneAttacking");
 		}
@@ -92,6 +96,7 @@ public class PlayerMovementMouse: MonoBehaviour
 		{
 			actualMoveSpeed -= 0.5f;
 			actualTurnSpeed -= 1f;
+			PickUpBag();
 		}
 		else if (!down)
 		{
@@ -124,8 +129,35 @@ public class PlayerMovementMouse: MonoBehaviour
 		if (bagsHeld > 0)
 		{
 			bagsHeld--;
+			if (Bags[2].enabled == true)
+			{
+				Bags[2].enabled = false;
+			}
+			else if (Bags[1].enabled == true)
+			{
+				Bags[1].enabled = false;
+			}
+			else if (Bags[0].enabled == true)
+			{
+				Bags[0].enabled = false;
+			}
 			ChangeMovement(false);
 			Instantiate(Bag, this.transform.position, Quaternion.identity, moneyHolder);
+		}
+	}
+
+	private void PickUpBag() {
+		if (Bags[0].enabled == false)
+		{
+			Bags[0].enabled = true;
+		}
+		else if (Bags[1].enabled == false)
+		{
+			Bags[1].enabled = true;
+		}
+		else if (Bags[2].enabled == false)
+		{
+			Bags[2].enabled = true;
 		}
 	}
 
