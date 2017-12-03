@@ -5,6 +5,7 @@ using UnityEngine;
 public class MoveBullet : MonoBehaviour {
 
 	public float moveSpeed;
+	public int damage;
 	
 	// Update is called once per frame
 	void Update () {
@@ -15,7 +16,7 @@ public class MoveBullet : MonoBehaviour {
 	{
 		if (c.CompareTag("Player"))
 		{
-			c.GetComponent<Health>().TakeDamage(50);
+			c.GetComponent<Health>().TakeDamage(damage);
 			Destroy(this.gameObject);
 		}
 	}

@@ -4,24 +4,42 @@ using UnityEngine;
 
 public class GuardAI : MonoBehaviour {
 
-	public bool canSeeTarget = false;
+	public float viewRadius;
+	[Range(0,360)]
+	public float viewAngle;
+
+	public LayerMask obstacleMask;
+	public LayerMask playerMask;
+
+	[HideInInspector]
+	public List<Transform> visiblePlayer;
+
+	public float meshResolution;
+	public MeshFilter viewMeshFilter;
+	Mesh viewMesh;
+
+	public bool canSeeTarget;
+	private bool hasLostTarget;
 	public float turnSpeed = 20;
-	public float timeBetweenShots = 2;
+	public float turnDampning;
 	public GameObject Bullet;
 	public Transform muzzle;
 
-	public Transform target;
-	private float timeTillNextShot = 0;
+	Transform target;
+	private float timeTillNextShot = 0f;
+	public float fireRate;
 
 	public float speed = 5;
 	public float waitTime = .3f;
 
 	public Transform pathHolder;
 
-	private bool hasLostTarget;
-
 	// Use this for initialization
-	void Start () {
+	private void Start () {
+		viewMesh = new Mesh();
+		viewMesh.name = "View Mesh";
+		viewMeshFilter.mesh = viewMesh;
+
 		target = FindObjectOfType<PlayerMovementMouse>().transform;
 		Vector2[] waypoints = new Vector2[pathHolder.childCount];
 		for (int i = 0; i < waypoints.Length; i++)
@@ -32,46 +50,102 @@ public class GuardAI : MonoBehaviour {
 		transform.position = waypoints[0];
 		StartCoroutine(FollowPath(waypoints));
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (target != null)
+
+	private void LateUpdate()
+	{
+		DrawFieldOfView();
+	}
+
+	public Vector2 DirFromAngle (float angleInDegrees, bool angleIsGlobal)
+	{
+		if (!angleIsGlobal)
 		{
-			Debug.DrawRay(transform.position, (target.position - transform.position) * 50f, Color.green);
+			angleInDegrees += -transform.eulerAngles.z;
+		}
+		return new Vector2(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+	}
 
-			Vector3 direction = target.position - transform.position;
-			float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-			//float angle = Vector3.Angle((target.position - transform.position), Vector3.up);
+	private void CheckVisibility()
+	{
+		canSeeTarget = false;
+		visiblePlayer.Clear();
 
-			if (canSeeTarget)
+		Collider2D[] targetsInRadius = Physics2D.OverlapCircleAll (transform.position, viewRadius, playerMask);
+
+		for (int i = 0; i < targetsInRadius.Length; i++)
+		{
+			Transform player = targetsInRadius[0].transform;
+			Vector3 dirToPlayer = (player.position - transform.position).normalized;
+			if (Vector2.Angle(transform.up, dirToPlayer) < viewAngle / 2)
 			{
-				hasLostTarget = false;
-				StopAllCoroutines();
-				OnSee(angle);
-			}
-			else if (!hasLostTarget && !canSeeTarget)
-			{
-				Vector2[] waypoints = new Vector2[pathHolder.childCount];
-				for (int i = 0; i < waypoints.Length; i++)
+				float distToPlayer = Vector2.Distance(transform.position, player.position);
+				if (!Physics2D.Raycast(transform.position, dirToPlayer, distToPlayer, obstacleMask))
 				{
-					waypoints[i] = pathHolder.GetChild(i).position;
+					visiblePlayer.Add(player);
+					canSeeTarget = true;
 				}
-				StartCoroutine(FollowPath(waypoints));
-				hasLostTarget = true;
 			}
 		}
 	}
 
-	private void OnSee(float angle) {
-		transform.eulerAngles = Vector3.forward * (270 + angle);
-		Shoot();
+	private void DrawFieldOfView()
+	{
+		int stepCount = Mathf.RoundToInt(viewAngle * meshResolution);
+		float stepAngleSize = viewAngle / stepCount;
+
+		List<Vector2> viewPoints = new List<Vector2>();
+
+		for (int i = 0; i < stepCount; i++)
+		{
+			float angle = -transform.eulerAngles.z - viewAngle / 2 + stepAngleSize * i;
+			ViewCastInfo newViewCast = ViewCast(angle);
+			viewPoints.Add(newViewCast.point);
+		}
+
+		int vertexCount = viewPoints.Count + 1;
+		Vector3[] vertices = new Vector3[vertexCount];
+		int[] triangles = new int[(vertexCount - 2) * 3];
+
+		vertices[0] = Vector2.zero;
+		for (int i = 0; i < vertexCount - 1; i++)
+		{
+			vertices[i + 1] = transform.InverseTransformPoint(viewPoints[i]);
+
+			if (i < vertexCount - 2)
+			{
+				triangles[i * 3] = 0;
+				triangles[i * 3 + 1] = i + 1;
+				triangles[i * 3 + 2] = i + 2;
+			}
+		}
+
+		viewMesh.Clear();
+		viewMesh.vertices = vertices;
+		viewMesh.triangles = triangles;
+		viewMesh.RecalculateNormals();
+	}
+
+	ViewCastInfo ViewCast(float globalAngle)
+	{
+		Vector2 dir = DirFromAngle(globalAngle, true);
+		RaycastHit2D hit;
+
+		hit = Physics2D.Raycast(transform.position, dir, viewRadius, obstacleMask);
+		if (hit)
+		{
+			return new ViewCastInfo(true, hit.point, hit.distance, globalAngle);
+		}
+		else
+		{
+			return new ViewCastInfo(false, (Vector2)transform.position + dir * viewRadius, viewRadius, globalAngle);
+		}
 	}
 
 	private void Shoot() {
 		print("shot");
-		if (Time.time > timeTillNextShot)
+		if (Time.time >= timeTillNextShot)
 		{
-			timeTillNextShot += timeBetweenShots;
+			timeTillNextShot = Time.time + 1f / fireRate;
 			Destroy(Instantiate(Bullet, muzzle.position, transform.rotation), 5);
 		}
 	}
@@ -80,17 +154,32 @@ public class GuardAI : MonoBehaviour {
 	{
 		int targetWaypointIndex = 1;
 		Vector2 targetWaypoint = waypoints[targetWaypointIndex];
-		//transform.LookAt(targetWaypoint);
+		Vector3 direction = targetWaypoint - (Vector2)transform.position;
+		float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+		transform.eulerAngles = Vector3.forward * (270 + angle);
 
-		while (true && !canSeeTarget)
+		while (true)
 		{
-			transform.position = Vector2.MoveTowards(transform.position, targetWaypoint, speed * Time.deltaTime);
-			if ((Vector2)transform.position == targetWaypoint)
+			CheckVisibility();
+
+			if (!canSeeTarget)
 			{
-				targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
-				targetWaypoint = waypoints[targetWaypointIndex];
-				yield return new WaitForSeconds(waitTime);
-				yield return StartCoroutine(TurnToFace(targetWaypoint));
+				transform.position = Vector2.MoveTowards(transform.position, targetWaypoint, speed * Time.deltaTime);
+				if ((Vector2)transform.position == targetWaypoint)
+				{
+					targetWaypointIndex = (targetWaypointIndex + 1) % waypoints.Length;
+					targetWaypoint = waypoints[targetWaypointIndex];
+					yield return new WaitForSeconds(waitTime);
+					yield return StartCoroutine(TurnToFace(targetWaypoint));
+				}
+			}
+			else
+			{
+				direction = target.position - transform.position;
+				angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+				transform.eulerAngles = Vector3.forward * (270 + angle);
+
+				Shoot();
 			}
 			yield return null;
 		}
@@ -99,7 +188,7 @@ public class GuardAI : MonoBehaviour {
 	IEnumerator TurnToFace(Vector2 lookTarget)
 	{
 		Vector2 dirToLookTarget = (lookTarget - (Vector2)transform.position).normalized;
-		float targetAngle = 90 - Mathf.Atan2(dirToLookTarget.x, dirToLookTarget.y) * Mathf.Rad2Deg;
+		float targetAngle = 360 - Mathf.Atan2(dirToLookTarget.x, dirToLookTarget.y) * Mathf.Rad2Deg;
 
 		while (Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.z, targetAngle)) > 0.05f)
 		{
@@ -109,7 +198,7 @@ public class GuardAI : MonoBehaviour {
 		}
 	}
 
-	void OnDrawGizmos()
+	private void OnDrawGizmos()
 	{
 		Vector2 startPosition = pathHolder.GetChild(0).position;
 		Vector2 previousPosition = startPosition;
@@ -121,5 +210,21 @@ public class GuardAI : MonoBehaviour {
 			previousPosition = waypoint.position;
 		}
 		Gizmos.DrawLine(previousPosition, startPosition);
+	}
+
+	public struct ViewCastInfo
+	{
+		public bool hit;
+		public Vector2 point;
+		public float distance;
+		public float angle;
+
+		public ViewCastInfo(bool _hit, Vector2 _point, float _distance, float _angle)
+		{
+			hit = _hit;
+			point = _point;
+			distance = _distance;
+			angle = _angle;
+		}
 	}
 }
