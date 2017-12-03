@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Animations;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
@@ -19,9 +20,9 @@ public class PlayerMovementMouse: MonoBehaviour
 
 	[Header("Combat Variables")]
 	public LayerMask hitMask;
-
-	private float actualMoveSpeed;
-	private float actualTurnSpeed;
+	public float timeBetweenAttacks = 2;
+	private float timeTillNextAttack = 0;
+	private float attackAnimFinTime;
 
 	[Space]
 
@@ -30,15 +31,22 @@ public class PlayerMovementMouse: MonoBehaviour
 	public int bagsHeld;
 	public Transform moneyHolder;
 
-	Vector3 movement;
-	Rigidbody2D rb;
+	private Vector3 movement;
+	private Rigidbody2D rb;
+
+	private float actualMoveSpeed;
+	private float actualTurnSpeed;
+
+	private Animator anim;
 
 	private void Awake()
 	{
+		anim = GetComponent<Animator>();
 		rb = GetComponent<Rigidbody2D>();
 		box = GetComponent<BoxCollider2D>();
 		actualMoveSpeed = baseMoveSpeed;
 		actualTurnSpeed = baseTurnSpeed;
+		anim.ResetTrigger("doneAttacking");
 	}
 
 	private void Update()
@@ -56,9 +64,17 @@ public class PlayerMovementMouse: MonoBehaviour
 			wantToPickUp = false;
 		}
 
-		if (Input.GetKeyDown(KeyCode.Space) && bagsHeld > 0)
+		if (Input.GetKeyDown(KeyCode.Space) && bagsHeld > 0 && Time.time > timeTillNextAttack)
 		{
+			attackAnimFinTime = Time.time + 1;
+			anim.ResetTrigger("doneAttacking");
+			timeTillNextAttack += timeBetweenAttacks;
 			AttackWithBag();
+		}
+		if (Time.time > attackAnimFinTime)
+		{
+			anim.ResetTrigger("isAttacking");
+			anim.SetTrigger("doneAttacking");
 		}
 	}
 	private void FixedUpdate()
@@ -88,7 +104,10 @@ public class PlayerMovementMouse: MonoBehaviour
 	{
 		movement.Set(h, v, 0f);												// set movement axis to user input
 
-		movement = movement.normalized * actualMoveSpeed * Time.deltaTime;	// change vector to meet per frame req.
+		movement = movement.normalized * actualMoveSpeed * Time.deltaTime;  // change vector to meet per frame req.
+
+		bool isWalking = (movement.magnitude > 0) ? true : false;
+		anim.SetBool("isWalking", isWalking);
 
 		rb.MovePosition(transform.position + movement);						// move the player
 	}
@@ -113,6 +132,7 @@ public class PlayerMovementMouse: MonoBehaviour
 	private void AttackWithBag() {
 		if (bagsHeld > 0 && bagsHeld < 6)
 		{
+			anim.SetTrigger("isAttacking");
 			Debug.DrawLine(this.transform.position,
 				(Camera.main.ScreenToWorldPoint(Input.mousePosition)), Color.red);
 			RaycastHit2D hit = Physics2D.Linecast(this.transform.position, 
