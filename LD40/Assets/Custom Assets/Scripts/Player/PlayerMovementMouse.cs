@@ -94,13 +94,13 @@ public class PlayerMovementMouse: MonoBehaviour
 	{
 		if (down && actualMoveSpeed > 0.5f)
 		{
-			actualMoveSpeed -= 0.5f;
+			actualMoveSpeed -= 1;
 			actualTurnSpeed -= 1f;
 			PickUpBag();
 		}
 		else if (!down)
 		{
-			actualMoveSpeed += 0.5f;
+			actualMoveSpeed += 1;
 			actualTurnSpeed += 1f;
 		}
 	}
