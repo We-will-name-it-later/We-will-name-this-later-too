@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class GuardAI : MonoBehaviour {
 
@@ -34,10 +35,12 @@ public class GuardAI : MonoBehaviour {
 
 	public Transform pathHolder;
 
-	AudioSource audio;
+	AudioSource audioSource;
 	public AudioClip shotSound;
 	public AudioClip heySound;
 	bool hasAudioPlayed = false;
+
+	private Animator anim;
 
 	// Use this for initialization
 	private void Start () {
@@ -45,7 +48,8 @@ public class GuardAI : MonoBehaviour {
 		viewMesh.name = "View Mesh";
 		viewMeshFilter.mesh = viewMesh;
 
-		audio = GetComponent<AudioSource>();
+		anim = GetComponentInChildren<Animator>();
+		audioSource = GetComponent<AudioSource>();
 
 		target = FindObjectOfType<PlayerMovementMouse>().transform;
 		Vector2[] waypoints = new Vector2[pathHolder.childCount];
@@ -152,7 +156,7 @@ public class GuardAI : MonoBehaviour {
 		print("shot");
 		if (Time.time >= timeTillNextShot)
 		{
-			audio.PlayOneShot(shotSound, 0.4f);
+			audioSource.PlayOneShot(shotSound, 0.4f);
 			timeTillNextShot = Time.time + 1f / fireRate;
 			Destroy(Instantiate(Bullet, muzzle.position, transform.rotation), 5);
 		}
@@ -170,6 +174,9 @@ public class GuardAI : MonoBehaviour {
 		{
 			CheckVisibility();
 
+			anim.SetBool("IsShooting", canSeeTarget);
+			anim.SetBool("IsWalking", true);
+
 			if (!canSeeTarget)
 			{
 				transform.position = Vector2.MoveTowards(transform.position, targetWaypoint, speed * Time.deltaTime);
@@ -185,7 +192,7 @@ public class GuardAI : MonoBehaviour {
 			{
 				if (!hasAudioPlayed)
 				{
-					audio.PlayOneShot(heySound);
+					audioSource.PlayOneShot(heySound);
 					hasAudioPlayed = true;
 				}
 				direction = target.position - transform.position;
@@ -205,9 +212,27 @@ public class GuardAI : MonoBehaviour {
 
 		while (Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.z, targetAngle)) > 0.05f)
 		{
+			anim.SetBool("IsWalking", false);
 			float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.z, targetAngle, turnSpeed * Time.deltaTime);
 			transform.eulerAngles = Vector3.forward * angle;
 			hasAudioPlayed = false;
+
+			CheckVisibility();
+			if (canSeeTarget)
+			{
+				Vector2 direction = target.position - transform.position;
+				angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+				transform.eulerAngles = Vector3.forward * (270 + angle);
+				Shoot();
+				anim.SetBool("IsShooting", true);
+			} else
+			{
+				Vector2 direction = (lookTarget - (Vector2)transform.position).normalized;
+				angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+				transform.eulerAngles = Vector3.forward * (270 + angle);
+				anim.SetBool("IsShooting", false);
+			}
+
 			yield return null;
 		}
 	}
