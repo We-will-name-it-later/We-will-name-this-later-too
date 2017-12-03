@@ -130,7 +130,7 @@ public class PlayerMovementMouse: MonoBehaviour
 	}
 
 	private void AttackWithBag() {
-		if (bagsHeld > 0 && bagsHeld < 6)
+		if (bagsHeld > 0 && bagsHeld < maxAmountOfBags)
 		{
 			anim.SetTrigger("isAttacking");
 			Debug.DrawLine(this.transform.position,
@@ -143,7 +143,7 @@ public class PlayerMovementMouse: MonoBehaviour
 				Health targetHealth = hit.collider.gameObject.GetComponent<Health>();
 				if (targetHealth != null)
 				{
-					targetHealth.TakeDamage(100 * bagsHeld);
+					targetHealth.TakeDamage(50 * bagsHeld);
 				}
 				 
 			}
