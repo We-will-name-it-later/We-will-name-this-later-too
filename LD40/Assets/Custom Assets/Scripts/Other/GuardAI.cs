@@ -214,8 +214,6 @@ public class GuardAI : MonoBehaviour {
 		{
 			anim.SetBool("IsWalking", false);
 			float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.z, targetAngle, turnSpeed * Time.deltaTime);
-			transform.eulerAngles = Vector3.forward * angle;
-			hasAudioPlayed = false;
 
 			CheckVisibility();
 			if (canSeeTarget)
@@ -227,9 +225,8 @@ public class GuardAI : MonoBehaviour {
 				anim.SetBool("IsShooting", true);
 			} else
 			{
-				Vector2 direction = (lookTarget - (Vector2)transform.position).normalized;
-				angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-				transform.eulerAngles = Vector3.forward * (270 + angle);
+				transform.eulerAngles = Vector3.forward * angle;
+				hasAudioPlayed = false;
 				anim.SetBool("IsShooting", false);
 			}
 
