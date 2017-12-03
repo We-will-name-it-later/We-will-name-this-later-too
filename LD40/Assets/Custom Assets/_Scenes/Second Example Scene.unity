@@ -432,7 +432,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 693384399}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -628,7 +628,8 @@ GameObject:
   - component: {fileID: 1222837444}
   - component: {fileID: 1222837443}
   - component: {fileID: 1222837442}
-  m_Layer: 0
+  - component: {fileID: 1222837445}
+  m_Layer: 8
   m_Name: 'Police '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -742,9 +743,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af093015e01e2e442a08fa4d40ac2136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 100
+  startingHealth: 5
   canvas: {fileID: 0}
   hitEffect: {fileID: 0}
+  currentHealth: 0
 --- !u!114 &1222837444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -778,6 +780,31 @@ MonoBehaviour:
   pathHolder: {fileID: 832390115}
   shotSound: {fileID: 8300000, guid: aa3b32d83a366f24b9357c7c1d383fb7, type: 3}
   heySound: {fileID: 8300000, guid: 0042bbbec47515841b7809ad7b8ff8a0, type: 3}
+--- !u!61 &1222837445
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1222837440}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.25, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 4, y: 2}
+  m_EdgeRadius: 0
 --- !u!1 &1230080995
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,7 +815,7 @@ GameObject:
   - component: {fileID: 1230080996}
   - component: {fileID: 1230080998}
   - component: {fileID: 1230080997}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: View Visualization
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1061,6 +1088,7 @@ MonoBehaviour:
   startingHealth: 100
   canvas: {fileID: 1842374726}
   hitEffect: {fileID: 8300000, guid: f8bd3b73f2031c5409815cb024d78bac, type: 3}
+  currentHealth: 0
   deathCanvas: {fileID: 1842374726}
 --- !u!95 &1327420056
 Animator:
@@ -1174,7 +1202,7 @@ GameObject:
   - component: {fileID: 1471021094}
   - component: {fileID: 1471021095}
   - component: {fileID: 1471021096}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Guard Art
   m_TagString: Untagged
   m_Icon: {fileID: 0}

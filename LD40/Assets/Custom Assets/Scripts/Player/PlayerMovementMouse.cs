@@ -134,16 +134,16 @@ public class PlayerMovementMouse: MonoBehaviour
 		{
 			anim.SetTrigger("isAttacking");
 			Debug.DrawLine(this.transform.position,
-				(Camera.main.ScreenToWorldPoint(Input.mousePosition)), Color.red);
+				(Camera.main.ScreenToWorldPoint(Input.mousePosition)), Color.cyan);
 			RaycastHit2D hit = Physics2D.Linecast(this.transform.position, 
 				(Camera.main.ScreenToWorldPoint(Input.mousePosition)), hitMask);
-			if (hit && Vector2.Distance(this.transform.position, hit.point) < 1)
+			if (hit && Vector2.Distance(this.transform.position, hit.point) < 2)
 			{
 				Debug.Log("Hit");
 				Health targetHealth = hit.collider.gameObject.GetComponent<Health>();
 				if (targetHealth != null)
 				{
-					targetHealth.TakeDamage(10 * bagsHeld);
+					targetHealth.TakeDamage(100 * bagsHeld);
 				}
 				 
 			}
