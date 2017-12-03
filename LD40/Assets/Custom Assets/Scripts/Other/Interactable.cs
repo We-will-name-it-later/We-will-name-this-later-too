@@ -25,10 +25,20 @@ public class Interactable : MonoBehaviour {
 		{
 			Interact();
 		}
+		if (c.CompareTag("DropZone"))
+		{
+			Sink();
+			print("in drop zone");
+		}
 	}
 
 	private void OnTriggerStay2D(Collider2D c)
 	{
+		if (c.CompareTag("DropZone"))
+		{
+			Sink();
+			print("in drop zone");
+		}
 		if (c.CompareTag("Player"))
 		{
 			Interact();
@@ -38,5 +48,9 @@ public class Interactable : MonoBehaviour {
 	public virtual void Interact() {
 
 		// add thing to player
+	}
+
+	public virtual void Sink() {
+		// call when to remove object from world
 	}
 }

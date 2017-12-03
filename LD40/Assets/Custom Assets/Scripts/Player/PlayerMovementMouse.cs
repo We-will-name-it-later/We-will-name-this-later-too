@@ -72,7 +72,6 @@ public class PlayerMovementMouse: MonoBehaviour
 		}
 		else if (Time.time > attackAnimFinTime)
 		{
-			print("can attack");
 			anim.SetBool("isAttacking", false);
 		}
 	}

@@ -21,4 +21,10 @@ public class MoneyBag : Interactable {
 			Destroy(this.gameObject);
 		}
 	}
+
+	public override void Sink()
+	{
+		base.Sink();
+		Destroy(this.gameObject);
+	}
 }
