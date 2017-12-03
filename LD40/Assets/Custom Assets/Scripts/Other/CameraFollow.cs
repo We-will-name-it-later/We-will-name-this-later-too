@@ -20,7 +20,7 @@ public class CameraFollow : MonoBehaviour {
 
 		Vector3 pos = deadZone.centre;
 
-		pos += Camera.main.ScreenToWorldPoint(Input.mousePosition).normalized;
+		pos += Camera.main.ScreenToWorldPoint(Input.mousePosition).normalized * 0.5f;
 
 		transform.position = pos + Vector3.forward * -10f;
 	}
