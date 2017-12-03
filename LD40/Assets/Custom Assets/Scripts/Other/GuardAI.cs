@@ -18,6 +18,8 @@ public class GuardAI : MonoBehaviour {
 
 	public Transform pathHolder;
 
+	private bool hasLostTarget;
+
 	// Use this for initialization
 	void Start () {
 		target = FindObjectOfType<PlayerMovementMouse>().transform;
@@ -27,6 +29,7 @@ public class GuardAI : MonoBehaviour {
 			waypoints[i] = pathHolder.GetChild(i).position;
 		}
 
+		transform.position = waypoints[0];
 		StartCoroutine(FollowPath(waypoints));
 	}
 	
@@ -42,7 +45,19 @@ public class GuardAI : MonoBehaviour {
 
 			if (canSeeTarget)
 			{
+				hasLostTarget = false;
+				StopAllCoroutines();
 				OnSee(angle);
+			}
+			else if (!hasLostTarget && !canSeeTarget)
+			{
+				Vector2[] waypoints = new Vector2[pathHolder.childCount];
+				for (int i = 0; i < waypoints.Length; i++)
+				{
+					waypoints[i] = pathHolder.GetChild(i).position;
+				}
+				StartCoroutine(FollowPath(waypoints));
+				hasLostTarget = true;
 			}
 		}
 	}
@@ -63,8 +78,6 @@ public class GuardAI : MonoBehaviour {
 
 	IEnumerator FollowPath(Vector2[] waypoints)
 	{
-		transform.position = waypoints[0];
-
 		int targetWaypointIndex = 1;
 		Vector2 targetWaypoint = waypoints[targetWaypointIndex];
 		//transform.LookAt(targetWaypoint);
