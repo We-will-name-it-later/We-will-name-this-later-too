@@ -8,6 +8,7 @@ public class PlayerMovementMouse: MonoBehaviour
 	[Header("Bag Variables")]
 	public GameObject Bag;
 	public bool wantToPickUp = false;
+	public SpriteRenderer[] Bags;
 
 	[Space]
 
@@ -46,7 +47,6 @@ public class PlayerMovementMouse: MonoBehaviour
 		box = GetComponent<BoxCollider2D>();
 		actualMoveSpeed = baseMoveSpeed;
 		actualTurnSpeed = baseTurnSpeed;
-		anim.ResetTrigger("doneAttacking");
 	}
 
 	private void Update()
@@ -64,17 +64,16 @@ public class PlayerMovementMouse: MonoBehaviour
 			wantToPickUp = false;
 		}
 
-		if (Input.GetKeyDown(KeyCode.Space) && bagsHeld > 0 && Time.time > timeTillNextAttack)
+		if (Time.time > timeTillNextAttack && Input.GetKeyDown(KeyCode.Space) && bagsHeld > 0)
 		{
-			attackAnimFinTime = Time.time + 1;
-			anim.ResetTrigger("doneAttacking");
+			attackAnimFinTime = Time.time + timeBetweenAttacks;
 			timeTillNextAttack += timeBetweenAttacks;
 			AttackWithBag();
 		}
-		if (Time.time > attackAnimFinTime)
+		else if (Time.time > attackAnimFinTime)
 		{
-			anim.ResetTrigger("isAttacking");
-			anim.SetTrigger("doneAttacking");
+			print("can attack");
+			anim.SetBool("isAttacking", false);
 		}
 	}
 	private void FixedUpdate()
@@ -90,12 +89,13 @@ public class PlayerMovementMouse: MonoBehaviour
 	{
 		if (down && actualMoveSpeed > 0.5f)
 		{
-			actualMoveSpeed -= 0.5f;
+			actualMoveSpeed -= 1;
 			actualTurnSpeed -= 1f;
+			PickUpBag();
 		}
 		else if (!down)
 		{
-			actualMoveSpeed += 0.5f;
+			actualMoveSpeed += 1;
 			actualTurnSpeed += 1f;
 		}
 	}
@@ -124,15 +124,43 @@ public class PlayerMovementMouse: MonoBehaviour
 		if (bagsHeld > 0)
 		{
 			bagsHeld--;
+			if (Bags[2].enabled == true)
+			{
+				Bags[2].enabled = false;
+			}
+			else if (Bags[1].enabled == true)
+			{
+				Bags[1].enabled = false;
+			}
+			else if (Bags[0].enabled == true)
+			{
+				Bags[0].enabled = false;
+			}
 			ChangeMovement(false);
 			Instantiate(Bag, this.transform.position, Quaternion.identity, moneyHolder);
+		}
+	}
+
+	private void PickUpBag() {
+		if (Bags[0].enabled == false)
+		{
+			Bags[0].enabled = true;
+		}
+		else if (Bags[1].enabled == false)
+		{
+			Bags[1].enabled = true;
+		}
+		else if (Bags[2].enabled == false)
+		{
+			Bags[2].enabled = true;
 		}
 	}
 
 	private void AttackWithBag() {
 		if (bagsHeld > 0 && bagsHeld < maxAmountOfBags)
 		{
-			anim.SetTrigger("isAttacking");
+			print("attack");
+			anim.SetBool("isAttacking", true);
 			Debug.DrawLine(this.transform.position,
 				(Camera.main.ScreenToWorldPoint(Input.mousePosition)), Color.cyan);
 			RaycastHit2D hit = Physics2D.Linecast(this.transform.position, 
