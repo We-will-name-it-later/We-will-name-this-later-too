@@ -6,6 +6,8 @@ public class CameraFollow : MonoBehaviour {
 
 	public PlayerMovementMouse target;
 	public Vector2 deadZoneSize;
+	[Range (0,3)]
+	public float lookAhead;
 
 	private DeadZone deadZone;
 
@@ -22,7 +24,7 @@ public class CameraFollow : MonoBehaviour {
 
 			Vector3 pos = deadZone.centre;
 
-			pos += Camera.main.ScreenToWorldPoint(Input.mousePosition).normalized * 0.5f;
+			pos += Camera.main.ScreenToWorldPoint(Input.mousePosition).normalized * lookAhead;
 
 			transform.position = pos + Vector3.forward * -10f;
 		}
