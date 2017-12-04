@@ -5,10 +5,12 @@ using UnityEngine;
 public class MoneyBag : Interactable {
 
 	private PlayerMovementMouse player;
+	private ScoreManager scoreManager;
 
 	private void Start()
 	{
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovementMouse>();
+		scoreManager = FindObjectOfType<ScoreManager>();
 	}
 
 	public override void Interact() {
@@ -26,5 +28,6 @@ public class MoneyBag : Interactable {
 	{
 		base.Sink();
 		Destroy(this.gameObject);
+		scoreManager.GotBag();
 	}
 }
