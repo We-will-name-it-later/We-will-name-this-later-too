@@ -1077,6 +1077,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114363969254556476, guid: d0072777133b0664b8101a697a3077af,
+        type: 2}
+      propertyPath: colorMappings.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4707015753262420, guid: d0072777133b0664b8101a697a3077af, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1115,7 +1120,90 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1739000065502580, guid: d0072777133b0664b8101a697a3077af, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114363969254556476, guid: d0072777133b0664b8101a697a3077af,
+        type: 2}
+      propertyPath: colorMappings.Array.data[0].prefab
+      value: 
+      objectReference: {fileID: 1162550974195618, guid: d8cb78a2e523ca9439040e325d304848,
+        type: 2}
+    - target: {fileID: 114363969254556476, guid: d0072777133b0664b8101a697a3077af,
+        type: 2}
+      propertyPath: map
+      value: 
+      objectReference: {fileID: 2800000, guid: f365cea3dcd0f1d4d921a9d7d3d1bac8, type: 3}
+    - target: {fileID: 114363969254556476, guid: d0072777133b0664b8101a697a3077af,
+        type: 2}
+      propertyPath: colorMappings.Array.data[3].color.r
+      value: 0.3764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 114363969254556476, guid: d0072777133b0664b8101a697a3077af,
+        type: 2}
+      propertyPath: colorMappings.Array.data[3].color.g
+      value: 0.49019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 114363969254556476, guid: d0072777133b0664b8101a697a3077af,
+        type: 2}
+      propertyPath: colorMappings.Array.data[3].color.b
+      value: 0.54509807
+      objectReference: {fileID: 0}
+    - target: {fileID: 114363969254556476, guid: d0072777133b0664b8101a697a3077af,
+        type: 2}
+      propertyPath: colorMappings.Array.data[3].color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114363969254556476, guid: d0072777133b0664b8101a697a3077af,
+        type: 2}
+      propertyPath: colorMappings.Array.data[3].prefab
+      value: 
+      objectReference: {fileID: 1162550974195618, guid: d8cb78a2e523ca9439040e325d304848,
+        type: 2}
+    - target: {fileID: 114363969254556476, guid: d0072777133b0664b8101a697a3077af,
+        type: 2}
+      propertyPath: colorMappings.Array.data[1].color.r
+      value: 0.8039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 114363969254556476, guid: d0072777133b0664b8101a697a3077af,
+        type: 2}
+      propertyPath: colorMappings.Array.data[1].color.g
+      value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 114363969254556476, guid: d0072777133b0664b8101a697a3077af,
+        type: 2}
+      propertyPath: colorMappings.Array.data[1].color.b
+      value: 0.22352941
+      objectReference: {fileID: 0}
+    - target: {fileID: 114363969254556476, guid: d0072777133b0664b8101a697a3077af,
+        type: 2}
+      propertyPath: colorMappings.Array.data[1].color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114363969254556476, guid: d0072777133b0664b8101a697a3077af,
+        type: 2}
+      propertyPath: colorMappings.Array.data[2].prefab
+      value: 
+      objectReference: {fileID: 1604711837837308, guid: f0e79d41902c91343b995b6517ab2511,
+        type: 2}
+    - target: {fileID: 114363969254556476, guid: d0072777133b0664b8101a697a3077af,
+        type: 2}
+      propertyPath: colorMappings.Array.data[0].color.r
+      value: 0.3764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 114363969254556476, guid: d0072777133b0664b8101a697a3077af,
+        type: 2}
+      propertyPath: colorMappings.Array.data[0].color.g
+      value: 0.49019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 114363969254556476, guid: d0072777133b0664b8101a697a3077af,
+        type: 2}
+      propertyPath: colorMappings.Array.data[0].color.b
+      value: 0.54509807
+      objectReference: {fileID: 0}
+    - target: {fileID: 114363969254556476, guid: d0072777133b0664b8101a697a3077af,
+        type: 2}
+      propertyPath: scale
+      value: 0.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0072777133b0664b8101a697a3077af, type: 2}
@@ -2691,7 +2779,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1842374726}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 503.5, y: 226.5, z: 0}
+  m_LocalPosition: {x: 394, y: 126, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1882532891}
@@ -2758,7 +2846,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 4.7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3015,7 +3103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!156049354 &1917702410
 Grid:
   m_ObjectHideFlags: 0
