@@ -242,6 +242,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bagWorth: 100
+  numberOfGuardsActive: 3
+  Guards:
+  - {fileID: 1222837440}
 --- !u!1 &223603437
 GameObject:
   m_ObjectHideFlags: 0
