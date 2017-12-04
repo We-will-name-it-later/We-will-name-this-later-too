@@ -62,6 +62,11 @@ public class GuardAI : MonoBehaviour {
 		StartCoroutine(FollowPath(waypoints));
 	}
 
+	private void OnEnable()
+	{
+		Start();
+	}
+
 	private void LateUpdate()
 	{
 		DrawFieldOfView();

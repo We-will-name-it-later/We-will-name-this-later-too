@@ -6,7 +6,8 @@ using TMPro;
 public class ScoreManager : MonoBehaviour {
 
 	public int bagWorth = 100;
-	public int numberOfGuardsActive = 3;
+	public int numberOfGuardsActive;
+	public int startingGuards;
 
 	public GameObject[] Guards;
 
@@ -20,14 +21,16 @@ public class ScoreManager : MonoBehaviour {
 		scoreValue = GetComponentInChildren<TextMeshProUGUI>();
 		if (Guards.Length > 0)
 		{
-			for (int i = 0; i < (Guards.Length - 1); i++)
+			for (int i = 0; i < Guards.Length; i++)
 			{
 				Guards[i].SetActive(false);
 			}
-			int numberOfActualGuards = (numberOfGuardsActive < (Guards.Length - 1)) ? numberOfGuardsActive : Guards.Length;
-			for (int i = 0; i < numberOfActualGuards; i++)
+			if (startingGuards <= (Guards.Length - 1))
 			{
-				ActivateNewGuard(i);
+				for (int i = 0; i < startingGuards; i++)
+				{
+					ActivateNewGuard(i);
+				}
 			}
 		}
 	}
@@ -35,15 +38,17 @@ public class ScoreManager : MonoBehaviour {
 	public void GotBag()
 	{
 		score += bagWorth;
-		scoreValue.SetText("$ " + score.ToString());
+		scoreValue.SetText("$ " + score.ToString() + "k");
 		if ((Guards.Length - 1) > numberOfGuardsActive)
 		{
 			ActivateNewGuard(numberOfGuardsActive + 1);
+			print("number of guards active = " + numberOfGuardsActive);
 		}
 	}
 
 	private void ActivateNewGuard(int i) {
 		Guards[i].SetActive(true);
 		numberOfGuardsActive++;
+		print(numberOfGuardsActive);
 	}
 }
