@@ -12,7 +12,7 @@ public class LevelGenerator : MonoBehaviour {
 		GenerateLevel();
 	}
 
-	private void GenerateLevel()
+	public void GenerateLevel()
 	{
 		for (int x = 0; x < map.width; x++)
 		{
