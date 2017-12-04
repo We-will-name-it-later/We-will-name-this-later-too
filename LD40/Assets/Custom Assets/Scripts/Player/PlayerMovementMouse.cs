@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Animations;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -9,6 +10,7 @@ public class PlayerMovementMouse: MonoBehaviour
 	public GameObject Bag;
 	public bool wantToPickUp = false;
 	public SpriteRenderer[] Bags;
+    public Transform[] bagSpawnPos;
 
 	[Space]
 
@@ -137,7 +139,7 @@ public class PlayerMovementMouse: MonoBehaviour
 			}
 			ChangeMovement(false);
 			MoneyBag bag = Instantiate(Bag, this.transform.position, Quaternion.identity, moneyHolder).GetComponent<MoneyBag>();
-            
+            bag.resetPosition = bagSpawnPos[(int)Random.Range(0, bagSpawnPos.Length - 1)].position;
 		}
 	}
 
