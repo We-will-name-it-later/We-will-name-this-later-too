@@ -536,6 +536,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114363969254556476, guid: d0072777133b0664b8101a697a3077af,
+        type: 2}
+      propertyPath: scale
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 114363969254556476, guid: d0072777133b0664b8101a697a3077af,
+        type: 2}
+      propertyPath: colorMappings.Array.data[0].prefab
+      value: 
+      objectReference: {fileID: 1106462405234450, guid: 0cd9efa532addbc4ca6f4cf2fdf4d7d1,
+        type: 2}
+    - target: {fileID: 1739000065502580, guid: d0072777133b0664b8101a697a3077af, type: 2}
+      propertyPath: m_Name
+      value: Wall Layout
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0072777133b0664b8101a697a3077af, type: 2}
   m_IsPrefabParent: 0
@@ -2110,7 +2125,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1842374726}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 394.5, y: 126.5, z: 0}
+  m_LocalPosition: {x: 503.5, y: 226.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1882532891}
