@@ -42,13 +42,11 @@ public class ScoreManager : MonoBehaviour {
 		if ((Guards.Length - 1) > numberOfGuardsActive)
 		{
 			ActivateNewGuard(numberOfGuardsActive + 1);
-			print("number of guards active = " + numberOfGuardsActive);
 		}
 	}
 
 	private void ActivateNewGuard(int i) {
 		Guards[i].SetActive(true);
 		numberOfGuardsActive++;
-		print(numberOfGuardsActive);
 	}
 }
