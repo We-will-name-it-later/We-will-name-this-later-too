@@ -27,7 +27,6 @@ public class ScoreManager : MonoBehaviour {
 			int numberOfActualGuards = (numberOfGuardsActive < (Guards.Length - 1)) ? numberOfGuardsActive : Guards.Length;
 			for (int i = 0; i < numberOfActualGuards; i++)
 			{
-				print(Guards.Length - 1);
 				ActivateNewGuard(i);
 			}
 		}
@@ -44,7 +43,6 @@ public class ScoreManager : MonoBehaviour {
 	}
 
 	private void ActivateNewGuard(int i) {
-		print(i);
 		Guards[i].SetActive(true);
 		numberOfGuardsActive++;
 	}
