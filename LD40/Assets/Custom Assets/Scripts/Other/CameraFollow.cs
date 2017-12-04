@@ -16,7 +16,11 @@ public class CameraFollow : MonoBehaviour {
 		deadZone = new DeadZone(target.box.bounds, deadZoneSize);
 	}
 
-	private void LateUpdate()
+    private void FixedUpdate() {
+        MoveCam();
+    }
+
+	private void MoveCam()
 	{
 		if (target != null)
 		{
