@@ -1906,6 +1906,7 @@ GameObject:
   - component: {fileID: 1222837443}
   - component: {fileID: 1222837442}
   - component: {fileID: 1222837445}
+  - component: {fileID: 1222837446}
   m_Layer: 8
   m_Name: 'Police '
   m_TagString: Enemy
@@ -2082,6 +2083,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 2}
   m_EdgeRadius: 0
+--- !u!50 &1222837446
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1222837440}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1000000
+  m_LinearDrag: 1000000
+  m_AngularDrag: 1000000
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1230080995
 GameObject:
   m_ObjectHideFlags: 0
@@ -2981,11 +3002,6 @@ Prefab:
     - target: {fileID: 1643853471307514, guid: e425453ee61178a45b058a3f80fd6580, type: 2}
       propertyPath: m_Name
       value: Money (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 212461604469755552, guid: e425453ee61178a45b058a3f80fd6580,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e425453ee61178a45b058a3f80fd6580, type: 2}

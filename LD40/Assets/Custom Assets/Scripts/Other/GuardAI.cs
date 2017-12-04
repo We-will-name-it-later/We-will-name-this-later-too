@@ -153,7 +153,6 @@ public class GuardAI : MonoBehaviour {
 	}
 
 	private void Shoot() {
-		print("shot");
 		if (Time.time >= timeTillNextShot)
 		{
 			audioSource.PlayOneShot(shotSound, 0.4f);

@@ -3,6 +3,8 @@ using UnityEngine.Animations;
 
 public class MoneyBag : Interactable {
 
+    public Vector2 resetPosition;
+ 
 	private PlayerMovementMouse player;
 	private ScoreManager scoreManager;
     private Animator anim;
@@ -12,6 +14,7 @@ public class MoneyBag : Interactable {
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovementMouse>();
 		scoreManager = FindObjectOfType<ScoreManager>();
         anim = GameObject.FindGameObjectWithTag("Screen").GetComponent<Animator>();
+
     }
 
 	public override void Interact() {
@@ -31,4 +34,10 @@ public class MoneyBag : Interactable {
 		scoreManager.GotBag();
         anim.SetTrigger("MoneyTrigger");
 	}
+
+    public override void ResetPos()
+    {
+        base.ResetPos();
+        transform.position = resetPosition;
+    }
 }

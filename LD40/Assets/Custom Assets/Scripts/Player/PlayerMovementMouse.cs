@@ -136,7 +136,8 @@ public class PlayerMovementMouse: MonoBehaviour
 				Bags[0].enabled = false;
 			}
 			ChangeMovement(false);
-			Instantiate(Bag, this.transform.position, Quaternion.identity, moneyHolder);
+			MoneyBag bag = Instantiate(Bag, this.transform.position, Quaternion.identity, moneyHolder).GetComponent<MoneyBag>();
+            
 		}
 	}
 

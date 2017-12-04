@@ -29,7 +29,12 @@ public class Interactable : MonoBehaviour {
 		{
 			Sink();
 		}
-	}
+        if (c.CompareTag("Enemy"))
+        {
+            print("enemy entered");
+            ResetPos();
+        }
+    }
 
 	private void OnTriggerStay2D(Collider2D c)
 	{
@@ -41,7 +46,12 @@ public class Interactable : MonoBehaviour {
 		{
 			Interact();
 		}
-	}
+        if (c.CompareTag("Enemy"))
+        {
+            print("enemy entered");
+            ResetPos();
+        }
+    }
 
 	public virtual void Interact() {
 
@@ -51,4 +61,8 @@ public class Interactable : MonoBehaviour {
 	public virtual void Sink() {
 		// call when to remove object from world
 	}
+
+    public virtual void ResetPos() {
+        // do the reset code
+    }
 }
