@@ -233,18 +233,22 @@ public class GuardAI : MonoBehaviour {
 		}
 	}
 
-	private void OnDrawGizmos()
+	private void OnDrawGizmosSelected()
 	{
 		Vector2 startPosition = pathHolder.GetChild(0).position;
 		Vector2 previousPosition = startPosition;
 
 		foreach (Transform waypoint in pathHolder)
 		{
-			Gizmos.DrawSphere(waypoint.position, .3f);
+            Gizmos.color = Color.cyan;
+
+            Gizmos.DrawSphere(waypoint.position, .3f);
 			Gizmos.DrawLine(previousPosition, waypoint.position);
 			previousPosition = waypoint.position;
 		}
-		Gizmos.DrawLine(previousPosition, startPosition);
+        Gizmos.color = Color.cyan;
+
+        Gizmos.DrawLine(previousPosition, startPosition);
 	}
 
 	public struct ViewCastInfo

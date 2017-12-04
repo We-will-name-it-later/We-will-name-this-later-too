@@ -39,7 +39,6 @@ GameObject:
   - component: {fileID: 82347613261839644}
   - component: {fileID: 61942265489177000}
   - component: {fileID: 50793193884444400}
-  - component: {fileID: 95507457070988750}
   m_Layer: 8
   m_Name: BigBoi
   m_TagString: Enemy
@@ -56,6 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4859148951659728}
   - component: {fileID: 212854486750014852}
+  - component: {fileID: 95286745127566468}
   m_Layer: 8
   m_Name: Guard Art
   m_TagString: Untagged
@@ -100,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1561516869955420}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.1, y: -2.5, z: 0.16207096}
+  m_LocalPosition: {x: 4.81, y: 25.76, z: 0.16207096}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 4859148951659728}
@@ -301,16 +301,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!95 &95507457070988750
+--- !u!95 &95286745127566468
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1561516869955420}
+  m_GameObject: {fileID: 1744332188579812}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 46b0933c3176da64a9d7c7bdd02f7d88, type: 2}
+  m_Controller: {fileID: 9100000, guid: 102482a3dd93de345b3500ae848cf0c5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -344,8 +344,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ccab712bd3749469497ad747819666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 4
+  viewRadius: 6
   viewAngle: 130
+  pathColour: {r: 0.6691177, g: 0.29519898, b: 0.29519898, a: 0}
   obstacleMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -360,9 +361,9 @@ MonoBehaviour:
   turnDampning: 9
   Bullet: {fileID: 1977834551817264, guid: 03d7b596d01216145b42ac1714698271, type: 2}
   muzzle: {fileID: 4316929189536356}
-  fireRate: 5
-  speed: 5
-  waitTime: 0
+  fireRate: 10
+  speed: 3
+  waitTime: 2
   pathHolder: {fileID: 0}
   shotSound: {fileID: 8300000, guid: aa3b32d83a366f24b9357c7c1d383fb7, type: 3}
   heySound: {fileID: 8300000, guid: 0042bbbec47515841b7809ad7b8ff8a0, type: 3}
