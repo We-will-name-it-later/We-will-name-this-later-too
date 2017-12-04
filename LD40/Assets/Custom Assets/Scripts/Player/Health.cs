@@ -25,6 +25,11 @@ public class Health : MonoBehaviour {
 			canvas.GetComponent<Animator>().SetTrigger("Damage Trigger");
 		}
 
+		if (this.gameObject.CompareTag("Enemy"))
+		{
+			canvas.GetComponent<Animator>().SetTrigger("Deal DMG Trigger");
+		}
+
 		if (currentHealth <= 0)
 		{
 			Die();

@@ -19,7 +19,6 @@ public class MoneyBag : Interactable {
 		{
 			player.bagsHeld++;
 			player.ChangeMovement(true);
-			Debug.Log("picked up money bag");
 			Destroy(this.gameObject);
 		}
 	}

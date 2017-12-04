@@ -158,7 +158,6 @@ public class PlayerMovementMouse: MonoBehaviour
 	private void AttackWithBag() {
 		if (bagsHeld > 0 && bagsHeld < maxAmountOfBags)
 		{
-			print("attack");
 			anim.SetBool("isAttacking", true);
 			Debug.DrawLine(this.transform.position,
 				(Camera.main.ScreenToWorldPoint(Input.mousePosition)), Color.cyan);

@@ -28,7 +28,6 @@ public class Interactable : MonoBehaviour {
 		if (c.CompareTag("DropZone"))
 		{
 			Sink();
-			print("in drop zone");
 		}
 	}
 
@@ -37,7 +36,6 @@ public class Interactable : MonoBehaviour {
 		if (c.CompareTag("DropZone"))
 		{
 			Sink();
-			print("in drop zone");
 		}
 		if (c.CompareTag("Player"))
 		{
