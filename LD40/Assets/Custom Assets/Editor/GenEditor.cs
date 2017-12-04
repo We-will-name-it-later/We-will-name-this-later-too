@@ -15,6 +15,10 @@ public class GenEditor : Editor {
         {
             gen.GenerateLevel();
         }
+        if (GUILayout.Button("Destroy"))
+        {
+            gen.DestroyGrid();
+        }
 
     }
 }

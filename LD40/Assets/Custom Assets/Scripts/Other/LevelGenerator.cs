@@ -44,4 +44,11 @@ public class LevelGenerator : MonoBehaviour {
 
 	}
 
+    public void DestroyGrid() {
+        foreach (Transform child in gameObject.transform)
+        {
+            GameObject.DestroyImmediate(child.gameObject);
+        }
+    }
+
 }
