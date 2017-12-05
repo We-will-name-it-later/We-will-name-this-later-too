@@ -65894,8 +65894,13 @@ Transform:
   - {fileID: 1299772415}
   - {fileID: 1041489910}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Father: {fileID: 0}
   m_RootOrder: 14
+=======
+  m_Father: {fileID: 1914944950}
+  m_RootOrder: 6
+>>>>>>> fa6d2362e5873e073d7c05b6ffabaaf86cc6a29c
 =======
   m_Father: {fileID: 1914944950}
   m_RootOrder: 6
@@ -82874,7 +82879,11 @@ RectTransform:
   - {fileID: 346223336}
   - {fileID: 92034204}
 <<<<<<< HEAD
+<<<<<<< HEAD
   - {fileID: 112544938}
+=======
+  - {fileID: 1488682685}
+>>>>>>> fa6d2362e5873e073d7c05b6ffabaaf86cc6a29c
 =======
   - {fileID: 1488682685}
 >>>>>>> fa6d2362e5873e073d7c05b6ffabaaf86cc6a29c
@@ -87561,8 +87570,13 @@ Transform:
   - {fileID: 97974038}
   - {fileID: 1928915408}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Father: {fileID: 0}
   m_RootOrder: 13
+=======
+  m_Father: {fileID: 1914944950}
+  m_RootOrder: 5
+>>>>>>> fa6d2362e5873e073d7c05b6ffabaaf86cc6a29c
 =======
   m_Father: {fileID: 1914944950}
   m_RootOrder: 5
