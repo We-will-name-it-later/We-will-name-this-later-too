@@ -6,19 +6,22 @@ using TMPro;
 public class ScoreManager : MonoBehaviour {
 
 	public int bagWorth = 100;
+	public int totalNumberOfBags = 12;
 	public int numberOfGuardsActive;
 	public int startingGuards;
 
 	public GameObject[] Guards;
 
-	private TextMeshProUGUI scoreValue;
+	public TextMeshProUGUI scoreValue;
+	public TextMeshProUGUI bagsLeftText;
 
 	private int score;
+	private int numberOfBagsTaken = 0;
 	private int guardsActive;
 
 	private void Start()
 	{
-		scoreValue = GetComponentInChildren<TextMeshProUGUI>();
+		bagsLeftText.SetText(numberOfBagsTaken.ToString() + " / 12");
 		if (Guards.Length > 0)
 		{
 			for (int i = 0; i < Guards.Length; i++)
@@ -38,7 +41,9 @@ public class ScoreManager : MonoBehaviour {
 	public void GotBag()
 	{
 		score += bagWorth;
+		numberOfBagsTaken++;
 		scoreValue.SetText("$ " + score.ToString() + "k");
+		bagsLeftText.SetText(numberOfBagsTaken.ToString() + " / 12");
 		if ((Guards.Length - 1) > numberOfGuardsActive)
 		{
 			ActivateNewGuard(numberOfGuardsActive + 1);

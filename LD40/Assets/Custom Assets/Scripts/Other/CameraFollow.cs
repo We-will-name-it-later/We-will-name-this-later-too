@@ -6,6 +6,7 @@ public class CameraFollow : MonoBehaviour {
 
 	public PlayerMovementMouse target;
 	public Vector2 deadZoneSize;
+	public float smoothValue = 5;
 	[Range (0,3)]
 	public float lookAhead;
 
@@ -30,7 +31,7 @@ public class CameraFollow : MonoBehaviour {
 
 			pos += Camera.main.ScreenToWorldPoint(Input.mousePosition).normalized * lookAhead;
 
-			transform.position = pos + Vector3.forward * -10f;
+			transform.position = Vector3.Lerp(transform.position, pos + Vector3.forward * -10f, Time.fixedDeltaTime * smoothValue);
 		}
 	}
 
