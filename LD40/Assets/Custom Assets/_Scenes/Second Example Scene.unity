@@ -82391,7 +82391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1327420050}
-  deadZoneSize: {x: 2, y: 2}
+  deadZoneSize: {x: 1.5, y: 1.5}
   smoothValue: 200
   lookAhead: 1.5
 --- !u!82 &1846330621
