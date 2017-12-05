@@ -65655,6 +65655,7 @@ Transform:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Father: {fileID: 0}
   m_RootOrder: 14
 =======
@@ -65665,6 +65666,10 @@ Transform:
   m_Father: {fileID: 1914944950}
   m_RootOrder: 6
 >>>>>>> fa6d2362e5873e073d7c05b6ffabaaf86cc6a29c
+=======
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+>>>>>>> parent of 54db385... Added Pause Screen.
 =======
   m_Father: {fileID: 0}
   m_RootOrder: 13
@@ -81787,6 +81792,7 @@ RectTransform:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   - {fileID: 112544938}
 =======
   - {fileID: 1488682685}
@@ -81794,6 +81800,8 @@ RectTransform:
 =======
   - {fileID: 1488682685}
 >>>>>>> fa6d2362e5873e073d7c05b6ffabaaf86cc6a29c
+=======
+>>>>>>> parent of 54db385... Added Pause Screen.
 =======
 >>>>>>> parent of 54db385... Added Pause Screen.
 =======
@@ -86201,6 +86209,7 @@ Transform:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Father: {fileID: 0}
   m_RootOrder: 13
 =======
@@ -86211,6 +86220,10 @@ Transform:
   m_Father: {fileID: 1914944950}
   m_RootOrder: 5
 >>>>>>> fa6d2362e5873e073d7c05b6ffabaaf86cc6a29c
+=======
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+>>>>>>> parent of 54db385... Added Pause Screen.
 =======
   m_Father: {fileID: 0}
   m_RootOrder: 12
