@@ -82299,7 +82299,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1327420050}
   deadZoneSize: {x: 2, y: 2}
+<<<<<<< HEAD
   lookAhead: 0.5
+=======
+  smoothValue: 200
+  lookAhead: 1.5
+>>>>>>> parent of fa6d236... Decreased Camera DeadZone Size
 --- !u!82 &1846330621
 AudioSource:
   m_ObjectHideFlags: 0
